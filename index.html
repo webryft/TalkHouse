@@ -19,18 +19,17 @@ nav a{color:#fff;margin-left:20px;cursor:pointer;text-decoration:none;font-weigh
 .primary{background:#0a8f5a;color:#fff}
 .secondary{background:#ccc}
 .loader{background:#0a8f5a;color:#fff;font-size:22px}
- body {margin:0;font-family:Arial,Helvetica,sans-serif;background:#0a8f5a;color:#fff;}
+body {margin:0;font-family:Arial,Helvetica,sans-serif;background:#0a8f5a;color:#fff;}
   
-  /* Cards stacked vertically */
+  /* Cards in horizontal row */
   .cards {
-    display: flex;
-    flex-direction: column;   /* vertical column */
+    display: flex;              /* horizontal layout */
+    flex-direction: row;
     gap: 20px;
     padding: 40px;
     background:#f4f4f4;
     color:#000;
-    max-width:400px;          /* narrow column */
-    margin:0 auto;
+    justify-content:center;     /* center them */
   }
   .card {
     background:#fff;
@@ -38,6 +37,7 @@ nav a{color:#fff;margin-left:20px;cursor:pointer;text-decoration:none;font-weigh
     padding:20px;
     text-align:center;
     cursor:pointer;
+    width:200px;
     box-shadow:0 4px 12px rgba(0,0,0,0.1);
   }
   .card img {
