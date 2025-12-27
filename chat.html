@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat</title>
+<style>
+body{margin:0;font-family:Arial;background:#0a8f5a;color:#fff}
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px}
+nav a{color:#fff;margin-left:20px;cursor:pointer;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:30px;background:#f4f4f4;color:#000}
+@media(max-width:768px){.grid{grid-template-columns:repeat(2,1fr)}}
+.card{background:#fff;padding:20px;border-radius:10px;text-align:center;cursor:pointer}
+.card img{width:90px;height:90px;border-radius:50%}
+.more{text-align:center;margin:20px}
+.modal-bg,.loader{position:fixed;top:0;left:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;z-index:1000}
+.modal-bg{background:rgba(0,0,0,.6)}
+.modal{background:#fff;color:#000;padding:25px;border-radius:12px;width:90%;max-width:400px}
+.modal input{width:100%;padding:10px;margin:8px 0}
+.modal button{padding:10px 15px;border:none;border-radius:6px;margin-top:10px}
+.primary{background:#0a8f5a;color:#fff}
+.secondary{background:#ccc}
+.loader{background:#0a8f5a;color:#fff;font-size:22px}
+</style>
+</head>
+<body>
+<header>
+<h2>Chat & earn</h2>
+<nav>
+<a onclick="openRegister()">Register</a>
+<a onclick="goAbout()">About</a>
+<a onclick="contact()">Contact Us</a>
+<a onclick="openLogin()">Login</a>
+</nav>
+</header>
+<section class="grid" id="grid"></section>
+<div class="more"><button onclick="toggleMore()">More</button></div>
+<div class="modal-bg" id="modal"></div>
+<div class="loader" id="loader">Loading...</div>
+<script>
+const users=JSON.parse(localStorage.getItem('user'))||null;
+let logged=!!users;
+const cards=[...Array(18)].map((_,i)=>({img:`image${i+1}.jpg`,phone:'2349168660191'}));
+let showAll=false;
+function render(){const g=document.getElementById('grid');g.innerHTML='';cards.slice(0,showAll?cards.length:3).forEach(c=>{g.innerHTML+=`<div class='card' onclick='chat("${c.phone}")'><img src='${c.img}'><p>Chat Partner</p></div>`})}
+render();
+function toggleMore(){showAll=!showAll;render()}
+function chat(p){if(!logged)return needReg();showLoader(`https://wa.me/${p}?text=${encodeURIComponent('Hello dear, are you available for a chat?')}`)}
+function needReg(){modal(`<h3>Registration Required</h3><p>Please register to start chatting.</p><button class='primary' onclick='openRegister()'>Register</button>`) }
+function modal(c){const m=document.getElementById('modal');m.innerHTML=`<div class='modal'>${c}<button class='secondary' onclick='closeM()'>Close</button></div>`;m.style.display='flex'}
+function closeM(){document.getElementById('modal').style.display='none'}
+function openRegister(){modal(`<h3>Register</h3><input placeholder='Name'><input placeholder='Phone'><input placeholder='Country'><input placeholder='Sex'><input placeholder='Marital Status'><input type='password' id='rp' placeholder='Password'><input placeholder='Pet Name'><button class='primary' onclick='register()'>Submit</button>`)}
+function register(){localStorage.setItem('user',JSON.stringify({p:document.getElementById('rp').value}));logged=true;closeM()}
+function openLogin(){modal(`<h3>Login</h3><input placeholder='Phone'><input type='password' id='lp'><button class='primary' onclick='login()'>Login</button><p style='cursor:pointer;color:blue' onclick='forgot()'>Forgotten password?</p>`)}
+function login(){const u=JSON.parse(localStorage.getItem('user'));if(u&&u.p===document.getElementById('lp').value){logged=true;closeM()} }
+function forgot(){modal(`<h3>Recover Password</h3><input placeholder='Pet Name'><button class='primary' onclick='closeM()'>Confirm</button>`)}
+function contact(){showLoader(`https://wa.me/2349168660191?text=${encodeURIComponent('Hello I have a question')}`)}
+function goAbout(){showLoader('about.html')}
+function showLoader(url){const l=document.getElementById('loader');l.style.display='flex';setTimeout(()=>window.location.href=url,2000)}
+</script>
+</body>
+</html>
