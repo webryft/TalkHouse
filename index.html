@@ -181,9 +181,9 @@
         <hr style="margin:14px 0;border:none;border-top:1px solid #eee" />
 
         <p style="margin:8px 0"><strong>Registration: ₦5,000</strong></p>
-        <p style="margin:0;color:#333">Account Number: <strong>1234567890</strong><br>
-        Account Name: <strong>Jude Daniel</strong><br>
-        Bank: <strong>Access Bank</strong></p>
+        <p style="margin:0;color:#333">Account Number: <strong>8168000422</strong><br>
+        Account Name: <strong>Godwin Uchenna</strong><br>
+        Bank: <strong>Opay</strong></p>
       </div>
     `;
     modalBg.style.display = 'flex';
@@ -279,8 +279,8 @@
     document.getElementById('closeSuccess').addEventListener('click', closeModal);
     document.getElementById('confirmBtn').addEventListener('click', () => {
       // redirect to WhatsApp with a short message including applicant name and phone
-      const waMsg = `Application submitted. Name: ${formData.name}; Phone: ${formData.phone}; Payment: ₦5,000. I confirm payment proof.`;
-      const url = 'https://wa.me/2349168660191?text=' + encodeURIComponent(waMsg);
+      const waMsg = `Application submitted. Name: ${formData.name}; Phone: ${formData.phone}; Payment: ₦5,000. I want to confirm payment proof.`;
+      const url = 'https://wa.me/15415244905?text=' + encodeURIComponent(waMsg);
       // show loader then redirect
       const loader = document.getElementById('loader');
       loader.style.display = 'flex';
