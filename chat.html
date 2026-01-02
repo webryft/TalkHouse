@@ -21,11 +21,14 @@ nav a{color:#fff;margin-left:20px;cursor:pointer;font-weight:600}
 .primary{background:#0a8f5a;color:#fff}
 .secondary{background:#ccc}
 .loader{background:#0a8f5a;color:#fff;font-size:22px}
+.writeup{padding:30px;text-align:center;background:#0a8f5a;color:#fff}
+.writeup h2{margin-bottom:10px}
+.writeup p{max-width:700px;margin:0 auto 15px;line-height:1.6}
 </style>
 </head>
 <body>
 <header>
-<h2>Chat & earn</h2>
+<h2>Chat & Earn</h2>
 <nav>
 <a onclick="openRegister()">Register</a>
 <a onclick="goAbout()">About</a>
@@ -33,30 +36,127 @@ nav a{color:#fff;margin-left:20px;cursor:pointer;font-weight:600}
 <a onclick="openLogin()">Login</a>
 </nav>
 </header>
+
+<!-- Write-up section -->
+<section class="writeup">
+  <h2>Welcome to Chat & Earn</h2>
+  <p>Connect instantly with partners and start earning through conversations. Each profile below is assigned a unique WhatsApp number — just click an image to begin chatting directly. Build connections, share ideas, and grow your rewards with every chat.</p>
+  <p>Remember: registration is required to unlock full access. Join today and discover how simple it is to chat and earn.</p>
+</section>
+
+<!-- Grid of chat partners -->
 <section class="grid" id="grid"></section>
 <div class="more"><button onclick="toggleMore()">More</button></div>
+
 <div class="modal-bg" id="modal"></div>
 <div class="loader" id="loader">Loading...</div>
+
 <script>
 const users=JSON.parse(localStorage.getItem('user'))||null;
 let logged=!!users;
-const cards=[...Array(18)].map((_,i)=>({img:`image${i+1}.jpg`,phone:'2349168660191'}));
+
+// Assign each image its own WhatsApp number
+const cards = [
+  { img: "image1.jpg", phone: "2348011111111" },
+  { img: "image2.jpg", phone: "2348022222222" },
+  { img: "image3.jpg", phone: "2348033333333" },
+  { img: "image4.jpg", phone: "2348044444444" },
+  { img: "image5.jpg", phone: "2348055555555" },
+  { img: "image6.jpg", phone: "2348066666666" },
+  { img: "image7.jpg", phone: "2348077777777" },
+  { img: "image8.jpg", phone: "2348088888888" },
+  { img: "image9.jpg", phone: "2348099999999" },
+  { img: "image10.jpg", phone: "2348101010101" },
+  { img: "image11.jpg", phone: "2348111111111" },
+  { img: "image12.jpg", phone: "2348121212121" },
+  { img: "image13.jpg", phone: "2348131313131" },
+  { img: "image14.jpg", phone: "2348141414141" },
+  { img: "image15.jpg", phone: "2348151515151" },
+  { img: "image16.jpg", phone: "2348161616161" },
+  { img: "image17.jpg", phone: "2348171717171" },
+  { img: "image18.jpg", phone: "2348181818181" }
+];
+
 let showAll=false;
-function render(){const g=document.getElementById('grid');g.innerHTML='';cards.slice(0,showAll?cards.length:3).forEach(c=>{g.innerHTML+=`<div class='card' onclick='chat("${c.phone}")'><img src='${c.img}'><p>Chat Partner</p></div>`})}
+
+function render(){
+  const g=document.getElementById('grid');
+  g.innerHTML='';
+  cards.slice(0,showAll?cards.length:3).forEach((c,i)=>{
+    g.innerHTML+=`
+      <div class='card' onclick='chat("${c.phone}")'>
+        <img src='${c.img}' alt="Chat Partner ${i+1}">
+        <p>Chat Partner ${i+1}</p>
+        <p>Number: ${c.phone}</p>
+      </div>`;
+  });
+}
 render();
+
 function toggleMore(){showAll=!showAll;render()}
-function chat(p){if(!logged)return needReg();showLoader(`https://wa.me/${p}?text=${encodeURIComponent('Hello dear, are you available for a chat?')}`)}
-function needReg(){modal(`<h3>Registration Required</h3><p>Please register to start chatting.</p><button class='primary' onclick='openRegister()'>Register</button>`) }
-function modal(c){const m=document.getElementById('modal');m.innerHTML=`<div class='modal'>${c}<button class='secondary' onclick='closeM()'>Close</button></div>`;m.style.display='flex'}
+
+function chat(p){
+  if(!logged) return needReg();
+  showLoader(`https://wa.me/${p}?text=${encodeURIComponent('Hello dear, are you available for a chat?')}`);
+}
+
+function needReg(){
+  modal(`<h3>Registration Required</h3><p>Please register to start chatting.</p><button class='primary' onclick='openRegister()'>Register</button>`);
+}
+
+function modal(c){
+  const m=document.getElementById('modal');
+  m.innerHTML=`<div class='modal'>${c}<button class='secondary' onclick='closeM()'>Close</button></div>`;
+  m.style.display='flex';
+}
+
 function closeM(){document.getElementById('modal').style.display='none'}
-function openRegister(){modal(`<h3>Register</h3><input placeholder='Name'><input placeholder='Phone'><input placeholder='Country'><input placeholder='Sex'><input placeholder='Marital Status'><input type='password' id='rp' placeholder='Password'><input placeholder='Pet Name'><button class='primary' onclick='register()'>Submit</button>`)}
-function register(){localStorage.setItem('user',JSON.stringify({p:document.getElementById('rp').value}));logged=true;closeM()}
-function openLogin(){modal(`<h3>Login</h3><input placeholder='Phone'><input type='password' id='lp'><button class='primary' onclick='login()'>Login</button><p style='cursor:pointer;color:blue' onclick='forgot()'>Forgotten password?</p>`)}
-function login(){const u=JSON.parse(localStorage.getItem('user'));if(u&&u.p===document.getElementById('lp').value){logged=true;closeM()} }
-function forgot(){modal(`<h3>Recover Password</h3><input placeholder='Pet Name'><button class='primary' onclick='closeM()'>Confirm</button>`)}
-function contact(){showLoader(`https://wa.me/2349168660191?text=${encodeURIComponent('Hello I have a question')}`)}
+
+function openRegister(){
+  modal(`<h3>Register</h3>
+    <input placeholder='Name'>
+    <input placeholder='Phone'>
+    <input placeholder='Country'>
+    <input placeholder='Sex'>
+    <input placeholder='Marital Status'>
+    <input type='password' id='rp' placeholder='Password'>
+    <input placeholder='Pet Name'>
+    <button class='primary' onclick='register()'>Submit</button>`);
+}
+
+function register(){
+  localStorage.setItem('user',JSON.stringify({p:document.getElementById('rp').value}));
+  logged=true;closeM();
+}
+
+function openLogin(){
+  modal(`<h3>Login</h3>
+    <input placeholder='Phone'>
+    <input type='password' id='lp'>
+    <button class='primary' onclick='login()'>Login</button>
+    <p style='cursor:pointer;color:blue' onclick='forgot()'>Forgotten password?</p>`);
+}
+
+function login(){
+  const u=JSON.parse(localStorage.getItem('user'));
+  if(u&&u.p===document.getElementById('lp').value){logged=true;closeM()}
+}
+
+function forgot(){
+  modal(`<h3>Recover Password</h3><input placeholder='Pet Name'><button class='primary' onclick='closeM()'>Confirm</button>`);
+}
+
+function contact(){
+  showLoader(`https://wa.me/2349168660191?text=${encodeURIComponent('Hello I have a question')}`);
+}
+
 function goAbout(){showLoader('about.html')}
-function showLoader(url){const l=document.getElementById('loader');l.style.display='flex';setTimeout(()=>window.location.href=url,2000)}
+
+function showLoader(url){
+  const l=document.getElementById('loader');
+  l.style.display='flex';
+  setTimeout(()=>window.location.href=url,2000);
+}
 </script>
 </body>
 </html>
