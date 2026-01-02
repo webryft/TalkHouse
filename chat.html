@@ -55,39 +55,38 @@ nav a{color:#fff;margin-left:20px;cursor:pointer;font-weight:600}
 const users=JSON.parse(localStorage.getItem('user'))||null;
 let logged=!!users;
 
-// Assign each image its own WhatsApp number
+// Assign each image its own WhatsApp number and a unique quote
 const cards = [
-  { img: "image1.jpg", phone: "2348011111111" },
-  { img: "image2.jpg", phone: "2348022222222" },
-  { img: "image3.jpg", phone: "2348033333333" },
-  { img: "image4.jpg", phone: "2348044444444" },
-  { img: "image5.jpg", phone: "2348055555555" },
-  { img: "image6.jpg", phone: "2348066666666" },
-  { img: "image7.jpg", phone: "2348077777777" },
-  { img: "image8.jpg", phone: "2348088888888" },
-  { img: "image9.jpg", phone: "2348099999999" },
-  { img: "image10.jpg", phone: "2348101010101" },
-  { img: "image11.jpg", phone: "2348111111111" },
-  { img: "image12.jpg", phone: "2348121212121" },
-  { img: "image13.jpg", phone: "2348131313131" },
-  { img: "image14.jpg", phone: "2348141414141" },
-  { img: "image15.jpg", phone: "2348151515151" },
-  { img: "image16.jpg", phone: "2348161616161" },
-  { img: "image17.jpg", phone: "2348171717171" },
-  { img: "image18.jpg", phone: "2348181818181" }
+  { img: "image1.jpg", phone: "2348011111111", quote: "I'm single in need of a companion" },
+  { img: "image2.jpg", phone: "2348022222222", quote: "Available for a good conversation" },
+  { img: "image3.jpg", phone: "2348033333333", quote: "Looking for someone who loves me as I am" },
+  { img: "image4.jpg", phone: "2348044444444", quote: "Ready to chat and connect" },
+  { img: "image5.jpg", phone: "2348055555555", quote: "Seeking friendship and laughter" },
+  { img: "image6.jpg", phone: "2348066666666", quote: "I enjoy deep talks and honesty" },
+  { img: "image7.jpg", phone: "2348077777777", quote: "Companionship is all I need" },
+  { img: "image8.jpg", phone: "2348088888888", quote: "Let’s share ideas and grow together" },
+  { img: "image9.jpg", phone: "2348099999999", quote: "I’m open to meaningful chats" },
+  { img: "image10.jpg", phone: "2348101010101", quote: "Looking for someone genuine" },
+  { img: "image11.jpg", phone: "2348111111111", quote: "I value love and respect" },
+  { img: "image12.jpg", phone: "2348121212121", quote: "Available for companionship" },
+  { img: "image13.jpg", phone: "2348131313131", quote: "Seeking someone to vibe with" },
+  { img: "image14.jpg", phone: "2348141414141", quote: "I’m here for good conversations" },
+  { img: "image15.jpg", phone: "2348151515151", quote: "Love me the way I am" },
+  { img: "image16.jpg", phone: "2348161616161", quote: "Friendship first, love later" },
+  { img: "image17.jpg", phone: "2348171717171", quote: "I enjoy chatting with new people" },
+  { img: "image18.jpg", phone: "2348181818181", quote: "Let’s connect and share stories" }
 ];
 
-let showAll=false;
+let showAll = false;
 
-function render(){
-  const g=document.getElementById('grid');
-  g.innerHTML='';
-  cards.slice(0,showAll?cards.length:3).forEach((c,i)=>{
-    g.innerHTML+=`
+function render() {
+  const g = document.getElementById('grid');
+  g.innerHTML = '';
+  cards.slice(0, showAll ? cards.length : 3).forEach((c) => {
+    g.innerHTML += `
       <div class='card' onclick='chat("${c.phone}")'>
-        <img src='${c.img}' alt="Chat Partner ${i+1}">
-        <p>Chat Partner ${i+1}</p>
-        <p>Number: ${c.phone}</p>
+        <img src='${c.img}' alt="Chat Partner">
+        <p>${c.quote}</p>
       </div>`;
   });
 }
