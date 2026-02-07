@@ -27,6 +27,25 @@
   .hero p{max-width:800px;margin:18px auto;color:rgba(255,255,255,0.95)}
   .btn{background:var(--white);color:var(--brand-green);padding:12px 26px;border-radius:6px;font-weight:700;cursor:pointer;display:inline-block}
 
+  /* Brand title + icon */
+.brand{display:flex;align-items:center;gap:10px}
+.brand h2{margin:0;font-size:20px}
+.title-icon{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+  border-radius:6px; /* optional, remove if you want square */
+  box-shadow:0 4px 10px rgba(0,0,0,0.12);
+  display:inline-block;
+}
+
+/* Responsive: slightly smaller icon on narrow screens */
+@media (max-width:520px){
+  .title-icon{width:28px;height:28px}
+  .brand h2{font-size:18px}
+}
+
+  
   .cards-wrap{background:var(--muted-bg);padding:28px 20px}
   .cards{
     display:flex;
@@ -85,12 +104,17 @@
 </head>
 <body>
 <header>
-  <h2>Chat & earn</h2>
+  <div class="brand">
+    <h2>Chat & earn</h2>
+    <img src="image.png" class="title-icon" alt="Chat & Earn logo">
+  </div>
+
   <nav>
     <a onclick="goAbout()">About</a>
     <a style="opacity:.5;cursor:not-allowed">Contact Us</a>
   </nav>
 </header>
+
 
 <section class="hero">
   <h1>Make money online by chatting lonely men, curious strangers, foreigners, older men, and people seeking your advice.</h1>
