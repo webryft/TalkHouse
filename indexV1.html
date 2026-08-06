@@ -135,12 +135,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:13p
 .modal input:focus,.modal select:focus,.modal textarea:focus{outline:none;border-color:var(--green)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.co-wrap{position:relative}
-.co-dropdown{position:absolute;top:calc(100% + 2px);left:0;right:0;max-height:210px;overflow-y:auto;background:#fff;border:1.5px solid #e0e0e0;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.14);z-index:60;display:none}
-.co-dropdown.open{display:block}
-.co-opt{padding:9px 12px;font-size:14px;color:var(--text);cursor:pointer}
-.co-opt:hover,.co-opt.hl{background:#f2f2f2}
-.co-empty{padding:10px 12px;font-size:13px;color:#999}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
 .modal-actions button{padding:10px 18px;border:none;border-radius:8px;cursor:pointer;font-weight:700;font-size:13px;transition:.2s;display:inline-flex;align-items:center;gap:6px}
 .modal-actions button svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
@@ -398,7 +392,7 @@ const REG_FEE=5000;
 const COUNTRIES=['Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Ivory Coast','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway','Oman','Pakistan','Palau','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent','Samoa','San Marino','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Sweden','Switzerland','Syria','Taiwan','Tajikistan','Tanzania','Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine','United Arab Emirates','United Kingdom','Uruguay','USA','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'];
 
 /* ── FLAGS ── */
-const FLAGS={'Afghanistan':'🇦🇫','Albania':'🇦🇱','Algeria':'🇩🇿','Andorra':'🇦🇩','Angola':'🇦🇴','Antigua and Barbuda':'🇦🇬','Argentina':'🇦🇷','Armenia':'🇦🇲','Australia':'🇦🇺','Austria':'🇦🇹','Azerbaijan':'🇦🇿','Bahamas':'🇧🇸','Bahrain':'🇧🇭','Bangladesh':'🇧🇩','Barbados':'🇧🇧','Belarus':'🇧🇾','Belgium':'🇧🇪','Belize':'🇧🇿','Benin':'🇧🇯','Bhutan':'🇧🇹','Bolivia':'🇧🇴','Bosnia and Herzegovina':'🇧🇦','Botswana':'🇧🇼','Brazil':'🇧🇷','Brunei':'🇧🇳','Bulgaria':'🇧🇬','Burkina Faso':'🇧🇫','Burundi':'🇧🇮','Cabo Verde':'🇨🇻','Cambodia':'🇰🇭','Cameroon':'🇨🇲','Canada':'🇨🇦','Central African Republic':'🇨🇫','Chad':'🇹🇩','Chile':'🇨🇱','China':'🇨🇳','Colombia':'🇨🇴','Comoros':'🇰🇲','Congo':'🇨🇬','Costa Rica':'🇨🇷','Croatia':'🇭🇷','Cuba':'🇨🇺','Cyprus':'🇨🇾','Czech Republic':'🇨🇿','Czech Rep.':'🇨🇿','Denmark':'🇩🇰','Djibouti':'🇩🇯','Dominica':'🇩🇲','Dominican Republic':'🇩🇴','Ecuador':'🇪🇨','Egypt':'🇪🇬','El Salvador':'🇸🇻','Equatorial Guinea':'🇬🇶','Eritrea':'🇪🇷','Estonia':'🇪🇪','Eswatini':'🇸🇿','Ethiopia':'🇪🇹','Fiji':'🇫🇯','Finland':'🇫🇮','France':'🇫🇷','Gabon':'🇬🇦','Gambia':'🇬🇲','Georgia':'🇬🇪','Germany':'🇩🇪','Ghana':'🇬🇭','Greece':'🇬🇷','Grenada':'🇬🇩','Guatemala':'🇬🇹','Guinea':'🇬🇳','Guinea-Bissau':'🇬🇼','Guyana':'🇬🇾','Haiti':'🇭🇹','Honduras':'🇭🇳','Hungary':'🇭🇺','Iceland':'🇮🇸','India':'🇮🇳','Indonesia':'🇮🇩','Iran':'🇮🇷','Iraq':'🇮🇶','Ireland':'🇮🇪','Israel':'🇮🇱','Italy':'🇮🇹','Ivory Coast':'🇨🇮','Jamaica':'🇯🇲','Japan':'🇯🇵','Jordan':'🇯🇴','Kazakhstan':'🇰🇿','Kenya':'🇰🇪','Kiribati':'🇰🇮','Kuwait':'🇰🇼','Kyrgyzstan':'🇰🇬','Laos':'🇱🇦','Latvia':'🇱🇻','Lebanon':'🇱🇧','Lesotho':'🇱🇸','Liberia':'🇱🇷','Libya':'🇱🇾','Liechtenstein':'🇱🇮','Lithuania':'🇱🇹','Luxembourg':'🇱🇺','Madagascar':'🇲🇬','Malawi':'🇲🇼','Malaysia':'🇲🇾','Maldives':'🇲🇻','Mali':'🇲🇱','Malta':'🇲🇹','Marshall Islands':'🇲🇭','Mauritania':'🇲🇷','Mauritius':'🇲🇺','Mexico':'🇲🇽','Micronesia':'🇫🇲','Moldova':'🇲🇩','Monaco':'🇲🇨','Mongolia':'🇲🇳','Montenegro':'🇲🇪','Morocco':'🇲🇦','Mozambique':'🇲🇿','Myanmar':'🇲🇲','Namibia':'🇳🇦','Nauru':'🇳🇷','Nepal':'🇳🇵','Netherlands':'🇳🇱','New Zealand':'🇳🇿','Nicaragua':'🇳🇮','Niger':'🇳🇪','Nigeria':'🇳🇬','North Korea':'🇰🇵','North Macedonia':'🇲🇰','Norway':'🇳🇴','Oman':'🇴🇲','Pakistan':'🇵🇰','Palau':'🇵🇼','Panama':'🇵🇦','Papua New Guinea':'🇵🇬','Paraguay':'🇵🇾','Peru':'🇵🇪','Philippines':'🇵🇭','Poland':'🇵🇱','Portugal':'🇵🇹','Qatar':'🇶🇦','Romania':'🇷🇴','Russia':'🇷🇺','Rwanda':'🇷🇼','Saint Kitts and Nevis':'🇰🇳','Saint Lucia':'🇱🇨','Saint Vincent':'🇻🇨','Samoa':'🇼🇸','San Marino':'🇸🇲','Saudi Arabia':'🇸🇦','Senegal':'🇸🇳','Serbia':'🇷🇸','Seychelles':'🇸🇨','Sierra Leone':'🇸🇱','Singapore':'🇸🇬','Slovakia':'🇸🇰','Slovenia':'🇸🇮','Solomon Islands':'🇸🇧','Somalia':'🇸🇴','South Africa':'🇿🇦','South Korea':'🇰🇷','South Sudan':'🇸🇸','Spain':'🇪🇸','Sri Lanka':'🇱🇰','Sudan':'🇸🇩','Suriname':'🇸🇷','Sweden':'🇸🇪','Switzerland':'🇨🇭','Syria':'🇸🇾','Taiwan':'🇹🇼','Tajikistan':'🇹🇯','Tanzania':'🇹🇿','Thailand':'🇹🇭','Timor-Leste':'🇹🇱','Togo':'🇹🇬','Tonga':'🇹🇴','Trinidad and Tobago':'🇹🇹','Tunisia':'🇹🇳','Turkey':'🇹🇷','Turkmenistan':'🇹🇲','Tuvalu':'🇹🇻','Uganda':'🇺🇬','Ukraine':'🇺🇦','United Arab Emirates':'🇦🇪','UAE':'🇦🇪','United Kingdom':'🇬🇧','UK':'🇬🇧','Uruguay':'🇺🇾','USA':'🇺🇸','Uzbekistan':'🇺🇿','Vanuatu':'🇻🇺','Vatican City':'🇻🇦','Venezuela':'🇻🇪','Vietnam':'🇻🇳','Yemen':'🇾🇪','Zambia':'🇿🇲','Zimbabwe':'🇿🇼'};
+const FLAGS={'Canada':'🇨🇦','Austria':'🇦🇹','USA':'🇺🇸','UK':'🇬🇧','United Kingdom':'🇬🇧','Germany':'🇩🇪','Australia':'🇦🇺','France':'🇫🇷','Italy':'🇮🇹','Spain':'🇪🇸','Brazil':'🇧🇷','Mexico':'🇲🇽','Japan':'🇯🇵','South Korea':'🇰🇷','Netherlands':'🇳🇱','Sweden':'🇸🇪','Norway':'🇳🇴','Portugal':'🇵🇹','Greece':'🇬🇷','Poland':'🇵🇱','Czech Rep.':'🇨🇿','Czech Republic':'🇨🇿','Hungary':'🇭🇺','Romania':'🇷🇴','Turkey':'🇹🇷','Egypt':'🇪🇬','Nigeria':'🇳🇬','Ghana':'🇬🇭','Kenya':'🇰🇪','India':'🇮🇳','Philippines':'🇵🇭','Thailand':'🇹🇭','Vietnam':'🇻🇳','Indonesia':'🇮🇩','Malaysia':'🇲🇾','Singapore':'🇸🇬','Ireland':'🇮🇪','New Zealand':'🇳🇿','South Africa':'🇿🇦','Morocco':'🇲🇦','Argentina':'🇦🇷','Chile':'🇨🇱','Colombia':'🇨🇴','Peru':'🇵🇪','Venezuela':'🇻🇪','Ecuador':'🇪🇨','Bolivia':'🇧🇴','Uruguay':'🇺🇾','Paraguay':'🇵🇾','China':'🇨🇳','Russia':'🇷🇺','Pakistan':'🇵🇰','Saudi Arabia':'🇸🇦','UAE':'🇦🇪','United Arab Emirates':'🇦🇪','Belgium':'🇧🇪','Switzerland':'🇨🇭','Denmark':'🇩🇰','Finland':'🇫🇮','Ukraine':'🇺🇦','Israel':'🇮🇱','Taiwan':'🇹🇼','Bangladesh':'🇧🇩','Ethiopia':'🇪🇹','Tanzania':'🇹🇿','Uganda':'🇺🇬','Sudan':'🇸🇩','Algeria':'🇩🇿','Iraq':'🇮🇶','Afghanistan':'🇦🇫','Poland':'🇵🇱','Cameroon':'🇨🇲','Senegal':'🇸🇳','Tunisia':'🇹🇳'};
 function flag(c){return FLAGS[c]||'🌐';}
 
 /* ── PROFILES (50) ── */
@@ -427,7 +421,7 @@ const profiles=[
   {img:'image21.jpg',name:'Daniel',country:'Romania',quote:'Looking for friendship and connection.',platform:'whatsapp',contact:'2349079525683'},
   {img:'image22.jpg',name:'Abigail',country:'Turkey',quote:'I value honesty and good humour.',platform:'skype',contact:'abigail.th'},
   {img:'image23.jpg',name:'Henry',country:'Egypt',quote:'Open to long conversations.',platform:'whatsapp',contact:'2349079525683'},
-  {img:'image24.jpg',name:'Emily R.',country:'Canada',quote:'Seeking genuine worldwide connection.',platform:'facebook',contact:'emilyr.talkhouse'},
+  {img:'image24.jpg',name:'Emily R.',country:'Nigeria',quote:'Seeking genuine worldwide connection.',platform:'facebook',contact:'emilyr.talkhouse'},
   {img:'image25.jpg',name:'Samuel',country:'Ghana',quote:'Ready to meet amazing people.',platform:'whatsapp',contact:'2349079525683'},
   {img:'image26.jpg',name:'Lily',country:'Kenya',quote:'Friendly, warm and always smiling.',platform:'telegram',contact:'lily_th'},
   {img:'image27.jpg',name:'Michael',country:'India',quote:'I love learning from conversation.',platform:'whatsapp',contact:'2349079525683'},
@@ -510,12 +504,6 @@ function updateHeaderAccount(){
   if(currentUser){
     btn.style.display='flex';
     nm.textContent=currentUser.fname||'Account';
-    const av=document.getElementById('acctAvatarWrap');
-    if(av){
-      av.innerHTML=currentUser.avatar
-        ? `<img src="${currentUser.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>`
-        : '<svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
-    }
     if(loginBtn)loginBtn.style.display='none';
   } else {
     btn.style.display='none';
@@ -654,30 +642,10 @@ function openRegisterPrompt(){
     </div>`);
 }
 
-/* ── COUNTRY SELECT (searchable) ── */
-function filterCountryOpts(q){
-  const dd=document.getElementById('co-dropdown');
-  if(!dd)return;
-  const query=(q||'').trim().toLowerCase();
-  const matches=COUNTRIES.filter(c=>c.toLowerCase().includes(query));
-  dd.innerHTML = matches.length
-    ? matches.map(c=>`<div class="co-opt" onclick="selectCountry('${c.replace(/'/g,"\\'")}')">${flag(c)} ${c}</div>`).join('')
-    : '<div class="co-empty">No matching country</div>';
-  dd.classList.add('open');
+/* ── COUNTRY SELECT ── */
+function buildCountryOptions(){
+  return '<option value="">Select your country</option>'+COUNTRIES.map(c=>`<option value="${c}">${flag(c)} ${c}</option>`).join('');
 }
-function selectCountry(c){
-  const search=document.getElementById('f-co-search');
-  const hidden=document.getElementById('f-co');
-  const dd=document.getElementById('co-dropdown');
-  if(search)search.value=flag(c)+' '+c;
-  if(hidden){hidden.value=c;hidden.dispatchEvent(new Event('input'));}
-  if(dd)dd.classList.remove('open');
-}
-document.addEventListener('click',function(e){
-  const wrap=document.getElementById('co-wrap');
-  const dd=document.getElementById('co-dropdown');
-  if(wrap&&dd&&!wrap.contains(e.target))dd.classList.remove('open');
-});
 function buildDayOpts(){let h='<option value="">Day</option>';for(let d=1;d<=31;d++)h+=`<option value="${String(d).padStart(2,'0')}">${d}</option>`;return h;}
 function buildMonthOpts(){const m=['January','February','March','April','May','June','July','August','September','October','November','December'];return '<option value="">Month</option>'+m.map((mn,i)=>`<option value="${String(i+1).padStart(2,'0')}">${mn}</option>`).join('');}
 function buildYearOpts(){const max=new Date().getFullYear()-18;let h='<option value="">Year</option>';for(let y=max;y>=max-80;y--)h+=`<option value="${y}">${y}</option>`;return h;}
@@ -696,14 +664,8 @@ function openApplyForm(){
       </div>
       <label>Phone Number *</label>
       <input id="f-ph" type="tel" placeholder="+234 800 000 0000"/>
-      <label>Email (Gmail) *</label>
-      <input id="f-em" type="email" placeholder="you@gmail.com"/>
       <label>Country *</label>
-      <div class="co-wrap" id="co-wrap">
-        <input id="f-co-search" autocomplete="off" placeholder="Search your country..." oninput="filterCountryOpts(this.value)" onfocus="filterCountryOpts(this.value)"/>
-        <input type="hidden" id="f-co"/>
-        <div class="co-dropdown" id="co-dropdown"></div>
-      </div>
+      <select id="f-co">${buildCountryOptions()}</select>
       <label>Date of Birth * (must be 18+)</label>
       <div class="row3">
         <div><select id="f-dd">${buildDayOpts()}</select></div>
@@ -734,12 +696,12 @@ function openApplyForm(){
         <button class="btn-secondary" onclick="closeModal()">Cancel</button>
       </div>
     </div>`);
-  const ids=['f-fn','f-ln','f-ph','f-em','f-co','f-dd','f-mm','f-yy','f-sx','f-ms','f-in','f-or','f-pw','f-pt'];
+  const ids=['f-fn','f-ln','f-ph','f-co','f-dd','f-mm','f-yy','f-sx','f-ms','f-in','f-or','f-pw','f-pt'];
   ids.forEach(id=>{const el=document.getElementById(id);if(el){el.addEventListener('input',validateReg);el.addEventListener('change',validateReg);}});
   validateReg();
 }
 function validateReg(){
-  const ids=['f-fn','f-ln','f-ph','f-em','f-co','f-dd','f-mm','f-yy','f-sx','f-ms','f-in','f-or','f-pw','f-pt'];
+  const ids=['f-fn','f-ln','f-ph','f-co','f-dd','f-mm','f-yy','f-sx','f-ms','f-in','f-or','f-pw','f-pt'];
   const ok=ids.every(id=>{const el=document.getElementById(id);return el&&el.value.trim();});
   const btn=document.getElementById('regBtn');if(btn)btn.disabled=!ok;
 }
@@ -747,7 +709,6 @@ function submitReg(){
   const fn=document.getElementById('f-fn').value.trim();
   const ln=document.getElementById('f-ln').value.trim();
   const ph=document.getElementById('f-ph').value.trim();
-  const em=document.getElementById('f-em').value.trim();
   const co=document.getElementById('f-co').value;
   const dd=document.getElementById('f-dd').value;
   const mm=document.getElementById('f-mm').value;
@@ -760,14 +721,13 @@ function submitReg(){
   const pt=document.getElementById('f-pt').value.trim();
   const err=document.getElementById('r-err');
   if(pw.length<6){err.textContent='Password must be at least 6 characters.';return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){err.textContent='Please enter a valid email address.';return;}
   const uid='th_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
-  const data={uid,fname:fn,lname:ln,phone:ph,email:em,country:co,dob:`${yy}-${mm}-${dd}`,sex:sx,marital:ms,interest:ins,orient:ori,petName:pt,pw,paid:false,paymentStatus:'pending',registeredAt:new Date().toISOString(),logs:[{type:'registered',time:new Date().toISOString()}]};
+  const data={uid,fname:fn,lname:ln,phone:ph,country:co,dob:`${yy}-${mm}-${dd}`,sex:sx,marital:ms,interest:ins,orient:ori,petName:pt,pw,paid:false,paymentStatus:'pending',registeredAt:new Date().toISOString(),logs:[{type:'registered',time:new Date().toISOString()}]};
   pendingRegData=data;
   localStorage.setItem('th_user',JSON.stringify(data));
   if(window._FB){
     window._fbSetDoc(window._fbDoc(window._db,'users',uid),{...data,pw:'[protected]',petName:'[protected]',createdAt:new Date().toISOString()}).catch(()=>{});
-    window._fbSetDoc(window._fbDoc(window._db,'registrations',uid),{uid,fname:fn,lname:ln,phone:ph,email:em,country:co,sex:sx,dob:`${yy}-${mm}-${dd}`,marital:ms,paid:false,paymentStatus:'pending',registeredAt:new Date().toISOString(),expiresAt:new Date(Date.now()+3*60*1000).toISOString()}).catch(()=>{});
+    window._fbSetDoc(window._fbDoc(window._db,'registrations',uid),{uid,fname:fn,lname:ln,phone:ph,country:co,sex:sx,dob:`${yy}-${mm}-${dd}`,marital:ms,paid:false,paymentStatus:'pending',registeredAt:new Date().toISOString(),expiresAt:new Date(Date.now()+3*60*1000).toISOString()}).catch(()=>{});
   }
   closeModal();
   document.getElementById('payOverlay').classList.add('show');
@@ -868,23 +828,13 @@ function openAccountPanel(){
     <div class="acct-panel">
       <div class="acct-panel-hero">
         <button class="modal-close" onclick="closeModal()" style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,.2);border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="acct-panel-avatar-wrap" onclick="document.getElementById('avatarFileInp').click()" title="Click to add your profile picture" style="cursor:pointer;position:relative;width:72px;height:72px;margin:0 auto 10px">
-          ${u.avatar
-            ? `<img src="${u.avatar}" class="acct-panel-avatar" style="margin:0"/>`
-            : `<div class="acct-panel-avatar-ph" style="margin:0"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`
-          }
-          <div style="position:absolute;bottom:-2px;right:-2px;width:24px;height:24px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff">
-            <svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round"><path d="M12 5v14M5 12h14"/></svg>
-          </div>
-        </div>
-        <input type="file" id="avatarFileInp" accept="image/*" style="display:none" onchange="handleAvatarUpload(this.files[0])"/>
+        <div class="acct-panel-avatar-ph"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
         <div class="acct-panel-name">${esc(u.fname||'')} ${esc(u.lname||'')}</div>
         <div class="acct-panel-phone">${esc(u.phone||'')}</div>
         <div style="margin-top:8px"><span class="acct-status-badge ${isPaid?'badge-paid':'badge-pending'}">${isPaid?'Active Member':'Payment Pending'}</span></div>
       </div>
       <div class="acct-panel-body">
         <div class="acct-section-title">Account Details</div>
-        <div class="acct-detail-row"><span class="acct-detail-label">Email</span><span class="acct-detail-val">${esc(u.email||'—')}</span></div>
         <div class="acct-detail-row"><span class="acct-detail-label">Country</span><span class="acct-detail-val">${flag(u.country)} ${esc(u.country||'—')}</span></div>
         <div class="acct-detail-row"><span class="acct-detail-label">Date of Birth</span><span class="acct-detail-val">${esc(u.dob||'—')}</span></div>
         <div class="acct-detail-row"><span class="acct-detail-label">Sex</span><span class="acct-detail-val">${esc(u.sex||'—')}</span></div>
@@ -917,31 +867,6 @@ function openAccountPanel(){
     </div>`);
 }
 
-function handleAvatarUpload(file){
-  if(!file||!currentUser)return;
-  if(!file.type.startsWith('image/')){alert('Please choose an image file.');return;}
-  const reader=new FileReader();
-  reader.onload=function(e){
-    const img=new Image();
-    img.onload=function(){
-      const size=300;
-      const canvas=document.createElement('canvas');
-      canvas.width=size;canvas.height=size;
-      const ctx=canvas.getContext('2d');
-      const scale=Math.max(size/img.width,size/img.height);
-      const w=img.width*scale,h=img.height*scale;
-      ctx.drawImage(img,(size-w)/2,(size-h)/2,w,h);
-      const dataUrl=canvas.toDataURL('image/jpeg',0.82);
-      currentUser.avatar=dataUrl;
-      localStorage.setItem('th_user',JSON.stringify(currentUser));
-      updateHeaderAccount();
-      openAccountPanel();
-      addNotif('Profile picture updated','Your new photo is saved on this device.');
-    };
-    img.src=e.target.result;
-  };
-  reader.readAsDataURL(file);
-}
 function saveSettings(){
   if(!currentUser)return;
   const notifEl=document.getElementById('tog-notif');

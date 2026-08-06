@@ -470,12 +470,12 @@ function sendMsg(){
   if(window._FB){
     window._fbAddDoc(window._fbCollection(window._db,'chats',chatId,'messages'),{
       chatId,profileIdx:pIdx,profileName:P.name,userId:currentUser.uid,
-      userName:currentUser.fname+' '+(currentUser.lname||''),userPhone:currentUser.phone,userEmail:currentUser.email||'',
+      userName:currentUser.fname+' '+(currentUser.lname||''),userPhone:currentUser.phone,
       msgId:msg.id,text:enc(txt),sender:'user',ts:msg.ts,deleted:false,reaction:null
     }).catch(()=>{});
     window._fbSetDoc(window._fbDoc(window._db,'chatMeta',chatId),{
       chatId,profileIdx:pIdx,profileName:P.name,userId:currentUser.uid,
-      userName:currentUser.fname+' '+(currentUser.lname||''),userPhone:currentUser.phone,userEmail:currentUser.email||'',
+      userName:currentUser.fname+' '+(currentUser.lname||''),userPhone:currentUser.phone,
       lastMsg:enc(txt),lastTs:msg.ts,unreadAdmin:1
     },{merge:true}).catch(()=>{});
   }
@@ -542,6 +542,3 @@ function toast(msg){
 render();
 if(window._FB)listenReplies();
 else document.addEventListener('firebase-ready',listenReplies);
-</script>
-</body>
-</html>
